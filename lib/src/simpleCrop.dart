@@ -185,7 +185,7 @@ class ImgCropState extends State<ImgCrop> with TickerProviderStateMixin, Drag {
         onScaleEnd: _isEnabled ? _handleScaleEnd : null,
         child: CustomPaint(
           painter: _CropPainter(
-            image: _image!,
+            image: _image,
             ratio: _ratio,
             view: _view,
             area: _area,
@@ -381,7 +381,7 @@ class ImgCropState extends State<ImgCrop> with TickerProviderStateMixin, Drag {
 }
 
 class _CropPainter extends CustomPainter {
-  final ui.Image image;
+  final ui.Image? image;
   final Rect view;
   final double ratio;
   final Rect area;
@@ -443,19 +443,19 @@ class _CropPainter extends CustomPainter {
       final src = Rect.fromLTWH(
         0.0,
         0.0,
-        image.width.toDouble(),
-        image.height.toDouble(),
+        image!.width.toDouble(),
+        image!.height.toDouble(),
       );
       final dst = Rect.fromLTWH(
-        view.left * image.width * scale * ratio,
-        view.top * image.height * scale * ratio,
-        image.width * scale * ratio,
-        image.height * scale * ratio,
+        view.left * image!.width * scale * ratio,
+        view.top * image!.height * scale * ratio,
+        image!.width * scale * ratio,
+        image!.height * scale * ratio,
       );
 
       canvas.save();
       canvas.clipRect(Rect.fromLTWH(0.0, 0.0, rect.width, rect.height));
-      canvas.drawImageRect(image, src, dst, paint);
+      canvas.drawImageRect(image!, src, dst, paint);
       canvas.restore();
     }
 

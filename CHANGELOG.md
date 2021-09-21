@@ -27,3 +27,7 @@ update README
 Add API `chipRatio` to control the rectangle aspect ratio
 
 Add API `handleSize` to control the chip handle area
+
+## 1.0.1
+fix
+
